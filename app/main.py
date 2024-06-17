@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from .routers import task
+# from .routers import task
+from routers import task
 from .database import init_db
 
 app = FastAPI()

@@ -13,7 +13,7 @@ export default new Router({
       component: TaskList,
     },
     {
-      path: "/task/:id?",
+      path: "/task-form/:id?",
       name: "TaskForm",
       component: TaskForm,
     },

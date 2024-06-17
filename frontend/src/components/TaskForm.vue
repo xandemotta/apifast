@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <h2>Formulário de Tarefa</h2>
-    <form @submit.prevent="submitForm">
-      <label for="title">Título:</label>
-      <input type="text" id="title" v-model="task.title" required />
-      <label for="description">Descrição:</label>
-      <input type="text" id="description" v-model="task.description" required />
-      <label for="completed">Completa:</label>
-      <input type="checkbox" id="completed" v-model="task.completed" />
-      <button type="submit">Salvar</button>
-    </form>
-  </div>
+  <v-container>
+    <v-form @submit.prevent="submitForm">
+      <v-text-field v-model="task.title" label="Título" required></v-text-field>
+      <v-text-field
+        v-model="task.description"
+        label="Descrição"
+        required
+      ></v-text-field>
+      <v-checkbox v-model="task.completed" label="Completa"></v-checkbox>
+      <v-btn type="submit" color="primary">Salvar</v-btn>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
-import api from "../api/api";
-
 export default {
   data() {
     return {
@@ -27,21 +25,15 @@ export default {
     };
   },
   methods: {
-    async submitForm() {
-      if (this.task.id) {
-        await api.updateTask(this.task.id, this.task);
-      } else {
-        await api.createTask(this.task);
-      }
+    submitForm() {
+      // Aqui você pode enviar a tarefa para o backend ou fazer outras ações necessárias
+      console.log(this.task);
       this.$router.push({ name: "TaskList" });
     },
   },
-  async created() {
-    const taskId = this.$route.params.id;
-    if (taskId) {
-      const response = await api.getTask(taskId);
-      this.task = response.data;
-    }
-  },
 };
 </script>
+
+<style>
+/* Estilos opcionais */
+</style>
