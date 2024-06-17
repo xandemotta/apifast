@@ -1,25 +1,62 @@
-print('oi')
-from fastapi import FastAPI
-print('oi')
-# from .routers import task
-# from routers import task
+# print('oi')
+# from fastapi import FastAPI
+# print('oi')
+# # from .routers import task
+# # from routers import task
+# import os
+# import sys
+
+# # Adiciona o diretório 'app' ao PYTHONPATH
+# sys.path.append(os.path.abspath('app'))
+
+# # Resto do seu código aqui...
+
+# from app.routers import task
+# from database import init_db
+
+# print('oi')
+# app = FastAPI()
+# print('oi')
+# @app.on_event("startup")
+# def on_startup():
+#     init_db()
+#     print('oi db')
+# print('oi')
+# app.include_router(task.router, prefix="/api")
+
+
 import os
 import sys
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Adiciona o diretório 'app' ao PYTHONPATH
 sys.path.append(os.path.abspath('app'))
 
-# Resto do seu código aqui...
-
 from app.routers import task
 from database import init_db
 
-print('oi')
 app = FastAPI()
-print('oi')
+
+# Configuração de CORS
+origins = [
+    "http://localhost:8081",  # URL do frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.on_event("startup")
 def on_startup():
     init_db()
-    print('oi db')
-print('oi')
+
 app.include_router(task.router, prefix="/api")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
