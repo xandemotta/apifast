@@ -7,6 +7,9 @@ WORKDIR /app
 # Copia o arquivo de requisitos para o contêiner
 COPY requirements.txt .
 
+# #PYTHONPATH NO APP PARA IMPORTAÇÕES
+# ENV PYTHONPATH "${PYTHONPATH}:/app"
+
 # Instala as dependências
 RUN pip install -r requirements.txt
 
