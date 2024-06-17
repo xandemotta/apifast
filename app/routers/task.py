@@ -57,15 +57,12 @@
 #     db.delete(db_task)
 #     db.commit()
 #     return db_task
-
-
-from ..schemas import Task
+from .. import schemas
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
-from app import models
-
+from app.models import models
 models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
