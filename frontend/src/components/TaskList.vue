@@ -1,12 +1,15 @@
-src/components/TaskList.vue
 <template>
-  <v-container>
-    <v-row>
+  <v-container class="task-list">
+    <v-row justify="center">
       <v-col cols="12" sm="6" md="4" v-for="task in tasks" :key="task.id">
-        <v-card class="elevation-2">
-          <v-card-title class="headline">{{ task.title }}</v-card-title>
-          <v-card-text>{{ task.description }}</v-card-text>
-          <v-card-actions>
+        <v-card class="task-card">
+          <v-card-title class="headline font-weight-bold">{{
+            task.title
+          }}</v-card-title>
+          <v-card-text class="description-text">{{
+            task.description
+          }}</v-card-text>
+          <v-card-actions class="d-flex justify-center align-end">
             <v-btn color="red" @click="deleteTask(task.id)">Delete</v-btn>
           </v-card-actions>
         </v-card>
@@ -39,7 +42,7 @@ export default class TaskList extends Vue {
 
   async deleteTask(taskId: number) {
     try {
-      await http.delete(`/tasks/${taskId}`);
+      await http.delete(`/delete/${taskId}`);
       this.tasks = this.tasks.filter((task) => task.id !== taskId);
     } catch (error) {
       console.error("Failed to delete task:", error);
@@ -48,8 +51,21 @@ export default class TaskList extends Vue {
 }
 </script>
 
-<style>
-.v-card {
-  margin-bottom: 20px;
+<style scoped>
+.task-list {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.task-card {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.description-text {
+  color: #333;
 }
 </style>
