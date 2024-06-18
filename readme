@@ -27,3 +27,11 @@ pipenv shell
 do diretório raiz da aplicação "apifast" rode o seguinte comando>
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+
+ENDPOINTS BACKEND>
+http://localhost:8080/api/tasks (GET)
+http://localhost:8080/api/create (POST)
+http://localhost:8080/api/task/'id' (GET) (substitua "id" por um numero de uma tarefa
+http://localhost:8080/api/update/'id (PUT) (substitua "id" por um numero de uma tarefa
+
+
