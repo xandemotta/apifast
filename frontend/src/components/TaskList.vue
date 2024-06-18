@@ -10,11 +10,29 @@
             task.description
           }}</v-card-text>
           <v-card-actions class="d-flex justify-center align-end">
-            <v-btn color="red" @click="deleteTask(task.id)">Delete</v-btn>
+            <v-btn color="blue" @click="editTask(task)">Editar</v-btn>
+            <v-btn color="red" @click="deleteTask(task.id)">Deletar</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+
+    <v-dialog v-model="editDialog" max-width="500px">
+      <v-card>
+        <v-card-title>Edit Task</v-card-title>
+        <v-card-text>
+          <v-text-field v-model="editedTask.title" label="Title"></v-text-field>
+          <v-text-field
+            v-model="editedTask.description"
+            label="Description"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="blue" @click="saveEdit">Salvar</v-btn>
+          <v-btn color="red" @click="cancelEdit">Cancelar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -26,6 +44,12 @@ import http from "../http"; // Importe a configuração do Axios
 @Component
 export default class TaskList extends Vue {
   tasks: Array<{ id: number; title: string; description: string }> = [];
+  editedTask: { id: number; title: string; description: string } = {
+    id: 0,
+    title: "",
+    description: "",
+  };
+  editDialog = false;
 
   async mounted() {
     this.loadTasks();
@@ -47,6 +71,30 @@ export default class TaskList extends Vue {
     } catch (error) {
       console.error("Failed to delete task:", error);
     }
+  }
+
+  editTask(task: { id: number; title: string; description: string }) {
+    this.editedTask = { ...task };
+    this.editDialog = true;
+  }
+
+  async saveEdit() {
+    try {
+      await http.put(`/update/${this.editedTask.id}`, this.editedTask);
+      const index = this.tasks.findIndex(
+        (task) => task.id === this.editedTask.id
+      );
+      if (index !== -1) {
+        this.$set(this.tasks, index, this.editedTask);
+      }
+      this.editDialog = false;
+    } catch (error) {
+      console.error("Failed to update task:", error);
+    }
+  }
+
+  cancelEdit() {
+    this.editDialog = false;
   }
 }
 </script>

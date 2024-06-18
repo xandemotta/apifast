@@ -3,14 +3,10 @@
 <template>
   <v-container>
     <v-form @submit.prevent="createTask">
-      <v-text-field v-model="title" label="Title" required></v-text-field>
-      <v-textarea
-        v-model="description"
-        label="Description"
-        required
-      ></v-textarea>
-      <v-checkbox v-model="completed">Completed</v-checkbox>
-      <v-btn type="submit">Create Task</v-btn>
+      <v-text-field v-model="title" label="Título" required></v-text-field>
+      <v-textarea v-model="description" label="Descrição" required></v-textarea>
+      <v-checkbox v-model="completed">Completada</v-checkbox>
+      <v-btn type="submit">Criar tarefa</v-btn>
     </v-form>
   </v-container>
 </template>

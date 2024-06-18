@@ -1,25 +1,14 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import TaskListView from "../views/TaskListView.vue";
+
 import TaskFormView from "../views/TaskFormView.vue";
 import TaskView from "../views/TaskView.vue";
 import TaskEdit from "@/views/TaskEdit.vue";
-import TaskList from "./components/TaskList.vue";
+import HomePage from "../views/HomePage.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/tasks",
-    name: "tasks",
-    component: TaskListView,
-  },
   {
     path: "/tasks/create",
     name: "createTask",
@@ -35,6 +24,11 @@ const routes: Array<RouteConfig> = [
     path: "/task/:id",
     name: "task",
     component: TaskView,
+  },
+  {
+    path: "/",
+    name: "HomePage",
+    component: HomePage,
   },
 ];
 

@@ -1,21 +1,19 @@
-<!-- src/App.vue -->
+src/App.vue
 <template>
   <v-app>
-    <MainMenu />
     <router-view></router-view>
     <TaskList />
   </v-app>
 </template>
 
 <script lang="ts">
-import MainMenu from "./components/MainMenu.vue";
-import TaskList from "./components/TaskList.vue"; // Importando o componente TaskList
+import HomePage from "./components/HomePage.vue";
+import TaskList from "./components/TaskList.vue";
 
 export default {
   name: "App",
   components: {
-    MainMenu,
-    TaskList, // Registrando o componente TaskList
+    TaskList,
   },
 };
 </script>
