@@ -3,8 +3,8 @@ import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import TaskListView from "../views/TaskListView.vue";
 import TaskFormView from "../views/TaskFormView.vue";
-
 import TaskView from "../views/TaskView.vue";
+import TesteVue from "../components/TesteVue.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +34,11 @@ const routes: Array<RouteConfig> = [
     path: "/task/:id",
     name: "task",
     component: TaskView,
+  },
+  {
+    path: "/teste",
+    name: "TesteVue",
+    component: TesteVue,
   },
 ];
 
