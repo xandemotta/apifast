@@ -1,21 +1,25 @@
+<!-- src/App.vue -->
 <template>
   <v-app>
     <MainMenu />
     <router-view></router-view>
-    <TesteVue />
-    <!-- Adicionando o componente TesteVue -->
+    <TaskList />
   </v-app>
 </template>
 
 <script lang="ts">
 import MainMenu from "./components/MainMenu.vue";
-import TesteVue from "./components/TesteVue.vue";
+import TaskList from "./components/TaskList.vue"; // Importando o componente TaskList
 
 export default {
   name: "App",
   components: {
     MainMenu,
-    TesteVue, // Registrando o componente TesteVue
+    TaskList, // Registrando o componente TaskList
   },
 };
 </script>
+
+<style>
+/* Adicione seus estilos aqui, se necessário */
+</style>

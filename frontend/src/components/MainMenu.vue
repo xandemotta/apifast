@@ -2,8 +2,7 @@
   <nav>
     <ul>
       <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/tasks">Ver Tarefas</router-link></li>
-      <li><router-link to="/about">Sobre</router-link></li>
+      <li><router-link to="/tasks/create">Criar Tarefa</router-link></li>
     </ul>
   </nav>
 </template>

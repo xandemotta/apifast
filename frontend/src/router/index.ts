@@ -4,7 +4,8 @@ import HomeView from "../views/HomeView.vue";
 import TaskListView from "../views/TaskListView.vue";
 import TaskFormView from "../views/TaskFormView.vue";
 import TaskView from "../views/TaskView.vue";
-import TesteVue from "../components/TesteVue.vue";
+import TaskEdit from "@/views/TaskEdit.vue";
+import TaskList from "./components/TaskList.vue";
 
 Vue.use(VueRouter);
 
@@ -26,19 +27,14 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/tasks/:id/edit",
-    name: "editTask",
-    component: TaskFormView,
+    name: "task-edit",
+    component: TaskEdit,
     props: true,
   },
   {
     path: "/task/:id",
     name: "task",
     component: TaskView,
-  },
-  {
-    path: "/teste",
-    name: "TesteVue",
-    component: TesteVue,
   },
 ];
 
