@@ -7,6 +7,8 @@
 
 <script lang="ts">
 import MainMenu from "./components/MainMenu.vue";
+import axios from "axios";
+import TesteList from "./components/TesteList.vue";
 
 export default {
   name: "App",

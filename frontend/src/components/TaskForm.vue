@@ -28,7 +28,7 @@ export default defineComponent({
 
     const createTask = async () => {
       try {
-        await axios.post("http://localhost:8000/create", {
+        await axios.post("http://localhost:8000/api/create", {
           title: title.value,
           description: description.value,
           completed: completed.value,
@@ -37,6 +37,7 @@ export default defineComponent({
         title.value = "";
         description.value = "";
         completed.value = false;
+        console.log("teste");
       } catch (error) {
         console.error(error);
       }
