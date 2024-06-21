@@ -17,3 +17,8 @@ class Task(TaskBase):
         orm_mode = True
 class TaskUpdateCompleted(BaseModel):
     completed: bool
+
+class TaskUpdate(BaseModel):
+    title: str = Field(None, max_length=20)
+    description: str = Field(None, max_length=100)
+    completed: bool = False

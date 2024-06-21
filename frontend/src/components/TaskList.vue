@@ -71,7 +71,7 @@ export default class TaskList extends Vue {
     id: number;
     title: string;
     description: string;
-    completed: boolean; // Adicionando o campo 'completed'
+    completed: boolean;
   }> = [];
   editedTask: { id: number; title: string; description: string } = {
     id: 0,
@@ -128,7 +128,7 @@ export default class TaskList extends Vue {
 
   async updateTaskCompletion(task: { id: number; completed: boolean }) {
     try {
-      await http.put(`/update/${task.id}`, { completed: task.completed });
+      await http.put(`/completed/${task.id}`, { completed: task.completed });
       // Atualize a lista de tarefas após a conclusão ser atualizada
       const index = this.tasks.findIndex((t) => t.id === task.id);
       if (index !== -1) {
