@@ -22,22 +22,6 @@ def read_tasks(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return tasks
 
 
-# @router.post("/create", response_model=Task)
-# def create_task(task: TaskCreate, db: Session = Depends(get_db)):
-#     db_task = models.Task(**task.dict())
-#     db.add(db_task)
-#     db.commit()
-#     db.refresh(db_task)
-#     return db_task
-
-# @router.post("/create", response_model=Task)
-# def create_task(task: TaskCreate, db: Session = Depends(get_db)):
-#     db_task = models.Task(**task.dict())
-#     db.add(db_task)
-#     print('teste create')
-#     db.commit()
-#     db.refresh(db_task)
-#     return db_task
 @router.post("/create", response_model=Task)
 def create_task(task: TaskCreate, db: Session = Depends(get_db)):
     db_task = models.Task(**task.dict())
@@ -64,6 +48,8 @@ def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_task)
     return db_task
+
+
 
 @router.delete("/delete/{task_id}", response_model=Task)
 def delete_task(task_id: int, db: Session = Depends(get_db)):

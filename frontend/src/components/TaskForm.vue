@@ -1,12 +1,13 @@
-<!-- project-root/frontend/src/components/TaskForm.vue -->
-
 <template>
   <v-container>
     <v-form @submit.prevent="createTask">
       <v-text-field v-model="title" label="Título" required></v-text-field>
       <v-textarea v-model="description" label="Descrição" required></v-textarea>
       <v-checkbox v-model="completed">Completada</v-checkbox>
-      <v-btn type="submit">Criar tarefa</v-btn>
+      <div class="button-group">
+        <v-btn type="submit">Criar tarefa</v-btn>
+        <v-btn color="blue" @click="goToHomePage">Página inicial</v-btn>
+      </div>
     </v-form>
   </v-container>
 </template>
@@ -33,17 +34,25 @@ export default defineComponent({
         title.value = "";
         description.value = "";
         completed.value = false;
-        console.log("teste");
       } catch (error) {
         console.error(error);
       }
     };
 
-    return { title, description, completed, createTask };
+    const goToHomePage = () => {
+      // Redirecionar para a página inicial
+      window.location.href = "http://localhost:8080/";
+    };
+
+    return { title, description, completed, createTask, goToHomePage };
   },
 });
 </script>
 
 <style scoped>
-/* Seu estilo aqui */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Espaçamento superior entre os botões */
+}
 </style>

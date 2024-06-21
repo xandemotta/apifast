@@ -20,17 +20,26 @@
             task.description
           }}</v-card-text>
           <v-card-actions class="d-flex justify-center">
+            <!-- Botão para editar tarefa -->
             <v-btn color="blue" @click="editTask(task)">Editar</v-btn>
+            <!-- Botão para excluir tarefa -->
             <v-btn color="red" @click="deleteTask(task.id)">Deletar</v-btn>
+            <!-- Checkbox para marcar conclusão da tarefa -->
+            <v-checkbox
+              v-model="task.completed"
+              @change="updateTaskCompletion(task)"
+            >
+              Concluída
+            </v-checkbox>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
 
     <!-- Botão para voltar para a página inicial -->
-    <router-link to="/" class="back-button"
-      >Voltar para a página inicial</router-link
-    >
+    <router-link to="/" class="back-button">
+      Voltar para a página inicial
+    </router-link>
 
     <v-dialog v-model="editDialog" max-width="500px">
       <v-card>
@@ -58,7 +67,12 @@ import http from "../http"; // Importe a configuração do Axios
 
 @Component
 export default class TaskList extends Vue {
-  tasks: Array<{ id: number; title: string; description: string }> = [];
+  tasks: Array<{
+    id: number;
+    title: string;
+    description: string;
+    completed: boolean; // Adicionando o campo 'completed'
+  }> = [];
   editedTask: { id: number; title: string; description: string } = {
     id: 0,
     title: "",
@@ -110,6 +124,20 @@ export default class TaskList extends Vue {
 
   cancelEdit() {
     this.editDialog = false;
+  }
+
+  async updateTaskCompletion(task: { id: number; completed: boolean }) {
+    try {
+      await http.put(`/update/${task.id}`, { completed: task.completed });
+      // Atualize a lista de tarefas após a conclusão ser atualizada
+      const index = this.tasks.findIndex((t) => t.id === task.id);
+      if (index !== -1) {
+        this.$set(this.tasks, index, { ...task }); // Atualiza apenas o campo 'completed'
+      }
+    } catch (error) {
+      console.error("Failed to update task completion:", error);
+      // Trate o erro de forma apropriada, exibindo uma mensagem ao usuário, por exemplo
+    }
   }
 
   // Retorna o número de colunas para o v-col baseado no número de tarefas
