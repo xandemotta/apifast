@@ -7,7 +7,6 @@ src/App.vue
 </template>
 
 <script lang="ts">
-import HomePage from "./components/HomePage.vue";
 import TaskList from "./components/TaskList.vue";
 
 export default {

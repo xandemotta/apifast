@@ -19,7 +19,8 @@
 export default {
   methods: {
     goToTaskList() {
-      this.$router.push({ name: "TaskList" });
+      window.location.href = "http://localhost:8080/tasks";
+      // this.$router.push({ name: "TaskList" });
     },
     goToCreateTask() {
       window.location.href = "http://localhost:8080/tasks/create";

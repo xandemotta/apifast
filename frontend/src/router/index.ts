@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
-import TaskFormView from "../views/TaskFormView.vue";
+// import TaskFormView from "../views/TaskFormView.vue";
 import TaskView from "../views/TaskView.vue";
 import TaskEdit from "@/views/TaskEdit.vue";
 import HomePage from "../views/HomePage.vue";
@@ -12,7 +12,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/tasks/create",
     name: "createTask",
-    component: TaskFormView,
+    component: TaskView,
   },
   {
     path: "/tasks/:id/edit",
