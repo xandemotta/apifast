@@ -1,13 +1,12 @@
-
 ToDo App FullStack
 Este é um aplicativo de lista de tarefas (ToDo) desenvolvido como um projeto FullStack utilizando Vue.js no frontend e FastAPI no backend. O objetivo do projeto é fornecer uma aplicação simples e funcional para gerenciar tarefas, com uma interface amigável e um backend robusto.
 
 Para construção desse projeto para KNN Idiomas foi utilizado:
 
-*Frontend*
+_Frontend_
 Vue2, Vuetify, Typescript, Axios
 
-*Backend*
+_Backend_
 FastAPI, SQLAlchemy, Pydantic, PostgreSQL
 
 outras ferramentas>
@@ -18,8 +17,10 @@ pipenv install
 pipenv shell
 
 -- PARA INICIAR O FRONTEND --
+npm install
 docker build -t frontend-image .
 docker run -it -p 8080:8080 frontend-image
+//npm run serve
 
 -- PARA INICIAR O BACKEND --
 pipenv install
@@ -27,11 +28,8 @@ pipenv shell
 do diretório raiz da aplicação "apifast" rode o seguinte comando>
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-
 ENDPOINTS BACKEND>
 http://localhost:8080/api/tasks (GET)
 http://localhost:8080/api/create (POST)
 http://localhost:8080/api/task/'id' (GET) (substitua "id" por um numero de uma tarefa
 http://localhost:8080/api/update/'id (PUT) (substitua "id" por um numero de uma tarefa
-
-
