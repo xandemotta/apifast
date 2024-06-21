@@ -1,7 +1,17 @@
 <template>
   <v-container class="task-list">
+    <!-- Botão para adicionar tarefa -->
+    <v-btn color="primary" class="add-task-button" @click="goToCreateTask">
+      Adicionar Tarefa
+    </v-btn>
+
+    <!-- Lista de tarefas -->
     <v-row justify="center">
-      <v-col cols="12" sm="6" md="4" v-for="task in tasks" :key="task.id">
+      <v-col
+        v-for="task in tasks"
+        :key="task.id"
+        :cols="getColSize(tasks.length)"
+      >
         <v-card class="task-card">
           <v-card-title class="headline font-weight-bold">{{
             task.title
@@ -9,13 +19,18 @@
           <v-card-text class="description-text">{{
             task.description
           }}</v-card-text>
-          <v-card-actions class="d-flex justify-center align-end">
+          <v-card-actions class="d-flex justify-center">
             <v-btn color="blue" @click="editTask(task)">Editar</v-btn>
             <v-btn color="red" @click="deleteTask(task.id)">Deletar</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+
+    <!-- Botão para voltar para a página inicial -->
+    <router-link to="/" class="back-button"
+      >Voltar para a página inicial</router-link
+    >
 
     <v-dialog v-model="editDialog" max-width="500px">
       <v-card>
@@ -96,6 +111,22 @@ export default class TaskList extends Vue {
   cancelEdit() {
     this.editDialog = false;
   }
+
+  // Retorna o número de colunas para o v-col baseado no número de tarefas
+  getColSize(numTasks: number): number {
+    if (numTasks === 1) {
+      return 12; // Uma única tarefa ocupa 100% da largura
+    } else if (numTasks <= 2) {
+      return 6; // Até duas tarefas ocupam 50% da largura
+    } else {
+      return 4; // Mais de duas tarefas ocupam 33.33% da largura
+    }
+  }
+
+  // Redireciona para a página de criação de tarefa
+  goToCreateTask() {
+    this.$router.push({ name: "createTask" });
+  }
 }
 </script>
 
@@ -103,17 +134,39 @@ export default class TaskList extends Vue {
 .task-list {
   background-color: #f0f0f0;
   padding: 20px;
+  min-height: 100vh; /* Garante altura mínima da viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
 }
 
 .task-card {
-  margin-bottom: 10px;
   width: 100%;
-  height: 150px;
-  padding: 10px;
+  height: 100%; /* Torna todos os cartões do mesmo tamanho */
+  margin-bottom: 20px;
   box-sizing: border-box;
 }
 
-.description-text {
-  color: #333;
+.v-card__actions {
+  justify-content: center; /* Centraliza os botões editar e excluir */
+}
+
+.back-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none; /* Remove sublinhado do link */
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.add-task-button {
+  margin-top: 20px;
 }
 </style>
