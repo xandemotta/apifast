@@ -15,3 +15,5 @@ class Task(TaskBase):
 
     class Config:
         orm_mode = True
+class TaskUpdateCompleted(BaseModel):
+    completed: bool

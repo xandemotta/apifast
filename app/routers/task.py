@@ -1,4 +1,4 @@
-from .schemas import Task, TaskCreate
+from .schemas import Task, TaskCreate, TaskUpdateCompleted
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -39,16 +39,16 @@ def read_task(task_id: int, db: Session = Depends(get_db)):
     return task
 
 @router.put("/update/{task_id}", response_model=Task)
-def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
+def update_task(task_id: int, task_update: TaskUpdateCompleted, db: Session = Depends(get_db)):
     db_task = db.query(models.Task).filter(models.Task.id == task_id).first()
     if db_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
-    for key, value in task.dict().items():
-        setattr(db_task, key, value)
+    
+    db_task.completed = task_update.completed  # Atualiza somente o campo completed
+    
     db.commit()
     db.refresh(db_task)
     return db_task
-
 
 
 @router.delete("/delete/{task_id}", response_model=Task)
