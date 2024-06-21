@@ -26,6 +26,7 @@ docker run -it -p 8080:8080 frontend-image
 pipenv install
 pipenv shell
 do diretório raiz da aplicação "apifast" rode o seguinte comando>
+docker build -t backend-image .
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ENDPOINTS BACKEND>
